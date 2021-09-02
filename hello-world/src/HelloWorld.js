@@ -25,13 +25,19 @@ export class HelloWorld extends LitElement {
   }
 
   __increment() {
+    if (this.counter < 1) this.shadowRoot.querySelector('#decrement').disabled = false;
     this.counter += 1;
+  }
+
+  __decrement() {
+    this.counter >= 1 ? this.counter -= 1 : this.shadowRoot.querySelector('#decrement').disabled = true;
   }
 
   render() {
     return html`
       <h2>${this.title} Nr. ${this.counter}!</h2>
       <button @click=${this.__increment}>increment</button>
+      <button id='decrement' @click=${this.__decrement}>decrement</button>
     `;
   }
 }
